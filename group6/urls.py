@@ -20,5 +20,8 @@ from g6app import views
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
-    path('', views.testmysql),
+    #path('', views.testmysql),
+    path('login/', views.user_login, name='login'),
+    path('landing/', views.landing_page, name='landing_page'),
+    path('', views.hero_page, name='hero_page'),
 ]
