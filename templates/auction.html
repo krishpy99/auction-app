@@ -1,0 +1,41 @@
+<!-- auctions.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auction</title>
+    <!-- Add any necessary CSS stylesheets or frameworks here -->
+    <style>
+        /* Define your styles for auction cards here */
+        .auction-card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px;
+            width: max-content;
+            float: left;
+            text-decoration: none; /* Remove default underline for anchor tags */
+            color: #000; /* Set text color */
+        }
+        .auction-card:hover {
+            background-color: #f0f0f0; /* Change background color on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Auction ID: {{ auctionid }}</h1>
+    <div class="auctions-container">
+        {% for item in item_list %}
+            <a href="{% url 'auctionitem' item.0%}" class="auction-card">
+                <div>
+                    <p><strong>Item ID: </strong> {{ item.0 }}</p>
+                    <p><strong>Product Name: </strong> {{ item.2 }}</p> 
+                    <!-- Add any other relevant information you want to display -->
+                </div>
+            </a>           
+        {% endfor %}
+    </div>
+</body>
+</html>

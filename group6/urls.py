@@ -21,4 +21,7 @@ from g6app import views
 urlpatterns = [
     #path('admin/', admin.site.urls),
     path('', views.testmysql),
+    path('auctions', views.auctions),
+    path('auction/<int:auctionid>/', views.auction, name='auction'),
+    path('auctionitem/<int:itemid>/', views.auctionitem, name='auctionitem'),
 ]
