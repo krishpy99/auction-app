@@ -5,6 +5,18 @@ def hero_page(request):
     return render(request, 'hero_page.html')
 
 
+def register(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.type = 'Normal'  # Set default value for 'Type' field
+            user.save()
+            return redirect('login')  # Redirect to the login page after successful registration
+    else:
+        form = UserRegistrationForm()
+    return render(request, 'register.html', {'form': form})
+
 
 def user_login(request):
     if request.method == 'POST':
