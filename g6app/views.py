@@ -42,6 +42,30 @@ def user_login(request):
         return render(request, 'login.html', {'error_message': error_message})
     return render(request, 'login.html')
 
+from django.contrib.auth.hashers import check_password
+
+def user_login(request):
+    error_message = None
+
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            try:
+                user = Users.objects.get(email=email)
+                if check_password(password, user.password):
+                    login(request, user)
+                    return redirect('landing_page')
+                else:
+                    error_message = 'Invalid email or password'
+            except Users.DoesNotExist:
+                error_message = 'User does not exist'
+    else:
+        form = LoginForm()
+
+    return render(request, 'login.html', {'form': form, 'error_message': error_message})
+
 
 
 @login_required
