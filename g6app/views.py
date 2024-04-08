@@ -42,7 +42,7 @@ def user_login(request):
         return render(request, 'login.html', {'error_message': error_message})
     return render(request, 'login.html')
 
-from django.contrib.auth.hashers import check_password
+'''from django.contrib.auth.hashers import check_password
 
 def user_login(request):
     error_message = None
@@ -64,7 +64,7 @@ def user_login(request):
     else:
         form = LoginForm()
 
-    return render(request, 'login.html', {'form': form, 'error_message': error_message})
+    return render(request, 'login.html', {'form': form, 'error_message': error_message})'''
 
 
 
