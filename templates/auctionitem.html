@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auction Item</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        .card {
+            width: 48%; /* Adjust width as needed */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .bid-button{
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .bid {
+            width: 48%; /* Adjust width as needed */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            margin-top: 10px;
+        }
+
+        .form label {
+            margin-bottom: 8px;
+        }
+
+        .form input[type="number"] {
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        .form button[type="submit"] {
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #007bff; /* Button color */
+            color: #fff; /* Text color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form button[type="submit"]:hover {
+            background-color: #0056b3; /* Hover color */
+        }
+        .alert-warning{
+            color: red;
+        }
+        .alert{
+            font-size: large;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>Product Details</h1>
+            <div class="item-details">
+                <h2><strong>ProductID: </strong>{{ auctionitem.productid.productid }}</h2>
+                <p><strong>Product Name: </strong> {{ auctionitem.productid.name }}</p>
+                <h4>Description: </h4>
+                <p>{{ auctionitem.productid.description }}</p>
+            </div>
+            {% if messages %}
+            <div class="alert alert-warning" role="alert">
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="bids card">
+            <h2>Bids</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Bid ID</th>
+                        <th>Amount</th>
+                        <th>Bidder Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for bid in bids %}
+                        <tr>
+                            <td>{{ bid.bidid }}</td>
+                            <td>{{ bid.amount }}</td>
+                            <td>{{ bid.bidderid.name }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <form class="form" action="{% url 'place_bid' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="itemid" value="{{ auctionitem.itemid }}">
+                <label for="bid_amount">Bid Amount:</label>
+                <input type="number" id="bid_amount" name="bid_amount" required>
+                <p class="warning">{{ message }}</p>
+                <!-- Include any other input fields for additional bid information -->
+                <button type="submit">Place Bid</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

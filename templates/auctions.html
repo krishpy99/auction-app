@@ -1,0 +1,43 @@
+<!-- auctions.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auctions</title>
+    <!-- Add any necessary CSS stylesheets or frameworks here -->
+    <style>
+        /* Define your styles for auction cards here */
+        .auction-card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px;
+            width: max-content;
+            float: left;
+            text-decoration: none; /* Remove default underline for anchor tags */
+            color: #000; /* Set text color */
+        }
+        .auction-card:hover {
+            background-color: #f0f0f0; /* Change background color on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Auctions</h1>
+    <div class="auctions-container">
+        {% for auction in auctions %}
+            <a href="{% url 'auction' auction.auctionid %}" class="auction-card">
+                <div>
+                    <h2>{{ auction.productid }}</h2>
+                    <p><strong>Auction ID:</strong> {{ auction.auctionid }}</p>
+                    <p><strong>Auction Date:</strong> {{ auction.auctiondate }}</p>
+                    <p><strong>Duration:</strong> {{ auction.duration }}</p>
+                    <!-- Add any other relevant information you want to display -->
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+</body>
+</html>

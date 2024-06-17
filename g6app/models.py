@@ -33,7 +33,7 @@ class Auctions(models.Model):
 class Bids(models.Model):
     bidid = models.AutoField(db_column='BidID', primary_key=True)  # Field name made lowercase.
     amount = models.DecimalField(db_column='Amount', max_digits=10, decimal_places=2)  # Field name made lowercase.
-    auctionid = models.ForeignKey(Auctions, models.DO_NOTHING, db_column='AuctionID', blank=True, null=True)  # Field name made lowercase.
+    itemid = models.ForeignKey('AuctionedItems', models.DO_NOTHING, db_column='ItemID', blank=True, null=True)  # Field name made lowercase.
     bidderid = models.ForeignKey('Users', models.DO_NOTHING, db_column='BidderID', blank=True, null=True)  # Field name made lowercase.
     bidtimestamp = models.DateTimeField(db_column='BidTimestamp', blank=True, null=True)  # Field name made lowercase.
 
